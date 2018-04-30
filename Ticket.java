@@ -14,7 +14,6 @@ public class Ticket extends User
     private String seatNumber;
     private String buyerEmail;
     private String buyerSuburb;
-    private MovieSession movieSession; 
 
     /**
      * Constructor for objects of class User
@@ -112,7 +111,7 @@ public class Ticket extends User
         //getter of buyer's Suburb
         return this.buyerSuburb;
     }    
-    
+
     public void display(){
         
         System.out.println("Name:"+this.name);

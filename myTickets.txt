@@ -254,3 +254,5 @@ Lilydale,Plaza theatre,11:00,Full,W7
 Lilydale,Plaza theatre,13:00,Full,W7
 Lilydale,Plaza theatre,19:00,Full,W7
 Lilydale,Plaza theatre,21:00,Full,W7
+
+7x5x5x20 = 3500

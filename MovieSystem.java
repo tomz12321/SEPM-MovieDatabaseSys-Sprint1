@@ -95,6 +95,7 @@ public class MovieSystem
         System.out.println("Exit System");
         //write into file
         //writeFile();
+        //writeTicket();
 
         //reset all the attributes
         loginUser = new User();
@@ -112,78 +113,10 @@ public class MovieSystem
      */
     private void readFile()
     {
-        //String filename = ("myvideos.txt");
-        //String videos;
-        //Movie loadFromFile;
-        // try catch to handle FileNotFoundException and IOException
-        //try
-        //{
-        //    FileReader inputFile = new FileReader(filename);
-        //    Scanner parser = new Scanner(inputFile);
-        //    int linecount = 0;
-        //    while (parser.hasNextLine())
-        //    {
-        //        loadFromFile = new Movie(); 
-        //        videos = parser.nextLine();
-        //        String[] attribute = videos.split(",");
-
-        //        for (int i = 0 ; i < attribute.length ; i++)
-        //       {
-        //           System.out.println (attribute[i]);
-        //       }
-
-        //        System.out.println ("Movie"+ linecount);
-        //        loadFromFile.setTitle(attribute[0]);
-        //        loadFromFile.setDirector(attribute[1]);
-                
-                //add movie to the list
-        //        Movie newMovie = new Movie(); 
-        //        ListOfActors newActorList = new ListOfActors();
-                //handle String
-        //        ArrayList<String> loadFromFileActorStringList = new ArrayList<String>();
-                
-                //for loop to handle attribute[2] - attribute[4] 
-        //        for (int i = 0 ; i < (attribute.length - 3) ; i++) 
-        //        {
-        //            loadFromFileActorStringList.add(attribute[ i + 2 ]);
-                    //String newActor2Name = attribute[3];
-                    //String newActor3Name = attribute[4];
-        //        }
-               
-                //actor list (using for loop to handle it)
-        //        ArrayList<Actors> loadFromFileActorList = new ArrayList<Actors>();
-        //        for (int i = 0 ; i < loadFromFileActorStringList.size() ; i++)
-        //        {
-        //            Actors actor = new Actors();
-                    //using loadFromFileActorStringList.get(i) to replace newActorName
-        //            actor.setName(loadFromFileActorStringList.get(i)); 
-        //            loadFromFileActorList.add(actor);
-        //        }
-        //        loadFromFile.cleanListOfActors();
-        //        loadFromFile.setActorList(loadFromFileActorList);                               
-                                
-                //use movie.getNumbersOfElement() to replace 6, 6 - 1 = 5
-        //        loadFromFile.setRating(convertStringtoInt(attribute[ loadFromFile.getNumbersOfElements() - 1 ]));
-                //loadFromFile.displayMovieRecord();
-        //        loadFromFile.displayMovieRecord();
-        //        newMovieList.addMovie(loadFromFile);
-        //        linecount++;
-        //        System.out.println ("=====================");
-        //    }
-        //    inputFile.close();
-        //}
-        //catch(FileNotFoundException exception)
-        //{
-        //    System.out.println(filename + " not found");
-        //}
-        //catch(IOException exception)
-        //{
-        //    System.out.println("Unexpected I/O error occured");
-        //}
     }
 
     /**
-     * A method to read movieSession from file
+     * A method to read movieSession from file and Create 2 ticket lists
      * 
      * @param  
      * @return
@@ -200,10 +133,10 @@ public class MovieSystem
             while(console.hasNextLine()){
                 String movieSessionString = console.nextLine();
                 String[] details = movieSessionString.split(",");
-                MovieSession movieSession = new MovieSession(details[0],details[1],details[2],details[3],details[4]);
+                MovieSession movieSession = new MovieSession(details[0],details[1],details[2],details[3],details[4],details[5]);
                 //display test data
                 System.out.println("= test data =");
-                movieSession.display();
+                //movieSession.display();
                 movieSessionList.add(movieSession);
                 createAvailableTicketlist(20,movieSession);
                 createBookedTicketlist(20);
@@ -225,11 +158,13 @@ public class MovieSystem
         {
             mainController.addAvailableTicket(movieSession);
         }
+        //writeAvailableTicket();
     }
     
     public void createBookedTicketlist(int ticketAmount)
     {
         System.out.println(ticketAmount + " ticket list has been created!");
+        //writeBookedTicket();
     }
     
     /**
@@ -307,9 +242,6 @@ public class MovieSystem
         Scanner input = new Scanner(System.in);
         Boolean isOperating = true;
         
-        //read from file
-        readFile();
-        
         //loadUserFile()
         userList = new ArrayList<User>();
         loadUserFile();
@@ -352,8 +284,9 @@ public class MovieSystem
         //create a ticket list to sell
         for (int i = 0; i < 20; i++)
         {
-            Ticket newTicket = new Ticket(loginUser.getName(), loginUser.getUserName(), loginUser.getPassword(),String.valueOf((i+1)),"","");
+            Ticket newTicket = new Ticket(loginUser.getName(), loginUser.getUserName(), loginUser.getPassword(),"Seat"+String.valueOf((i+1)),"","");
             newTicket.display();
+            ticketList.add(i,newTicket);
         }
         
         while (isOperating)
@@ -381,10 +314,22 @@ public class MovieSystem
                         //searchCase();
                         //(1) Book ticket for a movie session
                         System.out.println("(1) Book ticket for a movie session");
+
+                        //mainController.display(all the movie session)
+                        //mainController.addBookedTicket(movieSessionList.get(i));
+                        //mainController.deleteAvailableTicket();//AvailableTicketList.remove();
+
+                        //record the email and suburb of the customers
+                        System.out.println("Please insert seat number:");
+                        String seatNumber = input.nextLine();
+                        System.out.println("Please insert customer's Email:");
+                        String buyerEmail = input.nextLine();
+                        System.out.println("Please insert customer's Suburb:");
+                        String buyerSuburb = input.nextLine();
+                        Ticket newTicket = new Ticket(loginUser.getName(),loginUser.getUserName(),"","seat"+seatNumber,buyerEmail,buyerSuburb);
                         
-                        
-                        //newMovieList.addBookedTicket(movieSessionList.get(i));
-                        //newMovieList.deleteAvailableTicket();//AvailableTicketList.remove();
+                        System.out.println("= Ticket booked =");
+                        newTicket.display();
                         break;
                         case '2':
                         //(2) Delete ticket for a movie session

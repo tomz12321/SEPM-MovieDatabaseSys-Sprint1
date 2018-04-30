@@ -23,5 +23,3 @@ Lilydale,Plaza theatre,007,11:00,Full,W1
 Lilydale,Plaza theatre,007,13:00,Full,W1
 Lilydale,Plaza theatre,007,19:00,Full,W1
 Lilydale,Plaza theatre,007,21:00,Full,W1
-
-7x5x5 = 175
